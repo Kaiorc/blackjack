@@ -16,7 +16,7 @@ let cardsEl = document.getElementById("cards-el")
 
 // playerEl.textContent = player.name + ": $" + player.chips
 
-//função que retorna uma carta com valor aleatório
+//Função que retorna uma carta com valor aleatório
 function getRandomCard() {
     //Gera um valor pra carta de 1(Ás) até 13(sendo 11 = Valete(J), 12 = Rainha(Q) e 13 = Rei(K))
     let randomNumber = Math.floor( Math.random()*13 ) + 1
