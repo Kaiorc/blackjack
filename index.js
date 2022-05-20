@@ -3,6 +3,7 @@
 //     chips: 200
 // }
 
+//Array de cartas
 let cards = []
 let sum = 0
 let hasBlackJack = false
@@ -15,8 +16,13 @@ let cardsEl = document.getElementById("cards-el")
 
 // playerEl.textContent = player.name + ": $" + player.chips
 
+//função que retorna uma carta com valor aleatório
 function getRandomCard() {
+    //Gera um valor pra carta de 1(Ás) até 13(sendo 11 = Valete(J), 12 = Rainha(Q) e 13 = Rei(K))
     let randomNumber = Math.floor( Math.random()*13 ) + 1
+
+    //Se o valor for maior que 10, ou seja, J ou Q ou K,será retornado o valor 10,
+    //e se o valor for 1, retorna 11, de acordo com as regras do Blackjack
     if (randomNumber > 10) {
         return 10
     } else if (randomNumber === 1) {
@@ -26,6 +32,8 @@ function getRandomCard() {
     }
 }
 
+//Função que inicia o jogo, setando os valores das duas primeiras cartas,
+//as armazenando no vetor de cartas e invocando a renderização o jogo
 function startGame() {
     isAlive = true
     let firstCard = getRandomCard()
@@ -35,12 +43,18 @@ function startGame() {
     renderGame()
 }
 
+//Função que renderiza o jogo
 function renderGame() {
     cardsEl.textContent = "Cards: "
+
+    //Laço que percorre todo o vetor cartas e concatena
+    //o textContent com os novos valores
     for (let i = 0; i < cards.length; i++) {
         cardsEl.textContent += cards[i] + " "
     }
     
+    //Confere se a soma das cartas passou de 21 e se o jogador pode continuar jogando 
+    //e passa a mensagem para o textContent
     sumEl.textContent = "Sum: " + sum
     if (sum <= 20) {
         message = "Do you want to draw a new card?"
@@ -54,8 +68,10 @@ function renderGame() {
     messageEl.textContent = message
 }
 
-
+//Função que gera nova carta e a armazena no array de cartas
 function newCard() {
+    //Verifica se o jogador pode continuar jogando, gera e armazena a carta nova
+    //no array de cartas e invoca a renderização do jogo
     if (isAlive === true && hasBlackJack === false) {
         let card = getRandomCard()
         sum += card
@@ -63,4 +79,3 @@ function newCard() {
         renderGame()        
     }
 }
-    
